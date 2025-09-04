@@ -1,5 +1,3 @@
-import useModal from "../hooks/useModal";
-import Modal from "./Modal";
 import { stellarService } from "../lib/stellar";
 import { walletService } from "../lib/wallet";
 import type { ICampaign, ICrowdfundingContract } from "../interfaces/interface";
@@ -8,7 +6,6 @@ import { Button } from "@/components/ui/button";
 
 function AddCampaign() {
   const { currentAccount, setCampaigns, setHashId } = useProvider();
-  const { showModal, openModal, closeModal } = useModal();
 
   const handleCreateCampaign = async () => {
     const creator: string =
@@ -40,7 +37,6 @@ function AddCampaign() {
 
     setCampaigns((prevCampaigns) => [...prevCampaigns, newCampaign]);
     setHashId(hashId);
-    closeModal();
   };
 
   return (
