@@ -6,8 +6,6 @@ import {
   TransactionBuilder,
 } from "@stellar/stellar-sdk";
 
-const CONTRACT_ID = "CAXMJCVPN7IZ7LD6XNNCATCPKXANM3DI4U33O6NDA37JRYTHYCOJY644";
-
 export class StellarService {
   private readonly server: Horizon.Server;
   private readonly serverUrl: string;
@@ -23,7 +21,7 @@ export class StellarService {
     this.rpcUrl = "https://soroban-testnet.stellar.org";
 
     this.networkPassphrase = Networks.TESTNET;
-    this.contractAddress = CONTRACT_ID;
+    this.contractAddress = process.env.NEXT_PUBLIC_STARTUP_FUNDING_CONTRACT!;
   }
 
   async loadAccount(address: string) {

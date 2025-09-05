@@ -1,6 +1,6 @@
 import type { ClientOptions } from "@stellar/stellar-sdk/contract";
 
-export interface ICampaign {
+export interface Campaign {
   creator: string;
   goal: number;
   min_donation: number;
@@ -8,12 +8,27 @@ export interface ICampaign {
   supporters: number;
 }
 
-export interface IBaseContractClient {
+export interface CampaignInit {
+  creator: string;
+  goal: number;
+  min_donation: number;
+}
+
+export interface BaseContractClient {
   readonly options: ClientOptions;
   toXDR(): string;
 }
 
-export interface ICrowdfundingContract extends IBaseContractClient {
+export interface CrowdfundingContract extends BaseContractClient {
+  create_project: ({
+    creator,
+    goal,
+    min_donation,
+  }: {
+    creator: string;
+    goal: number;
+    min_donation: number;
+  }) => Promise<this>;
   create_campaign: ({
     creator,
     goal,
@@ -27,7 +42,7 @@ export interface ICrowdfundingContract extends IBaseContractClient {
     campaign_address,
   }: {
     campaign_address: string;
-  }) => Promise<ICampaign>;
+  }) => Promise<Campaign>;
   contribute: ({
     contributor,
     campaign_address,
